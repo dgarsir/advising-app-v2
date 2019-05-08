@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+    {% block content %}
+<div class='container'>
+  <h1>Viewing Submission</h1>
+  <ul class='list-group'>
+    <li class="list-group-item">First Name: {{ f_name }}</li>
+    <li class="list-group-item">Last Name: {{ l_name }}</li>
+    <li class="list-group-item">Semester: {{ semester }}</li>
+    <li class="list-group-item">Major: {{ major }}</li>
+    <li class="list-group-item">QPA: {{ QPA }}</li>
+    <li class="list-group-item">GPA: {{ GPA }}</li>
+    <li class="list-group-item">Intended Courses: {{ intended_courses }}</li>
+    <li class="list-group-item">Currently Enrolled: {{ currently_enrolled }}</li>
+    <li class="list-group-item">Completed Courses: {{ completed_courses }}</li>
+    <li class="list-group-item">Total Credits: {{ total_credits }}</li>
+    <li class="list-group-item">Date Submitted: {{ date_submitted }}</li>
+  </ul>
+</div>
+<div class='container' style='padding: 15px'>
+  <a href={% url 'confirm_approve' %} class='btn btn-success'>Approve</a>
+  <a href={% url 'confirm_deny' %} class='btn btn-danger'>Deny</a>
+  <a href={% url 'select_advising' %} class='btn btn-primary'>Back</a>
+</div>
+{% endblock %}

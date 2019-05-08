@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='container'>
+  <h1>Request Appointment</h1>
+  {% if req %}
+  <form method="POST" id="to_request">{% csrf_token %}
+	  <select id='to_request' name='to_request'>
+      	{% for x in req %}
+      <option value={{ x.id }}>{{ x.date }} {{ x.start_time }}-{{ x.end_time }}</option>
+          {% endfor %}
+    </select>
+    <a href = {% url 'view_appointments' %} decoration='none'>
+   	<button type="Submit" class="btn btn-primary save" method="POST">Request</button>
+    </a>
+    <a href = {% url 'home' %} class='btn btn-primary' role='button'>Back</a>
+    </form>
+    {% else %}
+    <div class='alert alert-primary'>No appointments available</div>
+    <a href = {% url 'home' %} class='btn btn-primary' role='button'>Back</a>
+    {% endif %}
+{% endblock %}

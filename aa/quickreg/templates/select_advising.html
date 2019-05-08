@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if to_be_advised %}
+<div class='container'>
+    <h1>View Advising Forms</h1>
+    <form method="POST">{% csrf_token %}
+        <div class='form-group' style='padding: 15px'>
+            <select id='form_select' name='selected_form'>
+            {% for element in to_be_advised %}
+                <option value={{ element.id }}>{{element.author}}</option>
+            {% endfor %}
+            </select>
+            <button class='btn btn-primary' type='submit button'>View</button>
+            <a href={% url 'home' %} class='btn btn-primary' role='button'>Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% else %}
+<div class='container'>
+    <h1>View Advising Forms</h1>
+    <div class='alert alert-secondary'>No advising forms.</div>
+    <a href={% url 'home' %} class='btn btn-primary' role='button'>Back</a>
+</div>
+{% endif %}
+{% endblock %}

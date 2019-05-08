@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class='container'>
+  <h1>Available Courses</h1>
+  {% if object_list %}
+  <table class='table'>
+    <tr>
+      <th>Course #</th>
+      <th>Course Name</th>
+      <th>Teacher</th>
+      <th>Semester</th>
+      <th>Credits</th>
+    </tr>
+      {% for obj in object_list %}
+    <tr>
+      <td>{{obj.course_number}}</td>
+      <td>{{obj.course_name}}</td>
+      <td>{{obj.teacher}}</td>
+      <td>{{obj.term}}</td>
+      <td>{{obj.credits}}</td>
+    </tr>
+      {% endfor %}
+  </table>
+  {% else %}
+  <div class='alert alert-secondary' role='alert'>No Courses</div>
+  {% endif %}
+  {% if user.user_type == 2 %}
+  <a href={% url 'courses_add'%} class='btn btn-primary'>Add Course</a>
+  {% if object_list %}
+  <a href={% url 'del_course'%} class='btn btn-primary'>Delete Course</a>
+  {% else %}
+  <a href='#' class='btn btn-primary disabled'>Delete Course</a>
+  {% endif %}
+  {% endif %}
+  <a href={% url 'home' %} class='btn btn-primary'>Back</a>
+</div>
+{% endblock %}

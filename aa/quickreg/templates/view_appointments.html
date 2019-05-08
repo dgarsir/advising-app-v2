@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}View Appointments{% endblock %}
+{% block content %}
+
+{% if user.user_type == 0 %}
+<div class='container'>
+    <h1>Appointments</h1>
+    {% if appts %}
+        <table class='table'>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Owner</th>
+            <th>EMPLID</th>
+        </tr>
+        {% for x in appts %}
+             <tr>
+                <td>{{x.date}}</td>
+                <td>{{x.start_time}} - {{x.end_time}}</td>
+                <td>{{x.owner_name}}</td>
+                <td>{{x.owner_EMPLID}}</td>
+             </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <div class='alert alert-secondary' role='alert'>You have no scheduled appointments</div>
+    {% endif %}
+        <a href={% url 'request_appointment' %} class='btn btn-primary' role='button'>Request Appointment</a>
+        <a href={% url 'home' %} class='btn btn-primary' type='button'>Back</a>
+</div>
+
+{% else %}
+
+<div class='container'>
+    <h1>Appointments</h1>
+    {% if appts %}
+        <table class='table'>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Owner</th>
+            <th>EMPLID</th>
+        </tr>
+        {% for x in appts %}
+             <tr>
+                <td>{{x.date}}</td>
+                <td>{{x.start_time}} - {{x.end_time}}</td>
+                <td>{{x.owner_name}}</td>
+                <td>{{x.owner_EMPLID}}</td>
+             </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <div class='alert alert-secondary' role='alert'>You have no scheduled appointments</div>
+    {% endif %}
+        <a href={% url 'add_appointment' %} class='btn btn-primary' role='button'>Add Appointment</a>
+        {% if appts %}
+        <a href={% url 'delete_appointment' %} class='btn btn-primary' role='button'>Delete Appointment</a>
+        {% else %}
+        <a href='#' class='btn btn-primary disabled' role='button'>Delete Appointment</a>
+        {% endif %}
+        <a href={% url 'home' %} class='btn btn-primary' type='button'>Back</a>
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+
+

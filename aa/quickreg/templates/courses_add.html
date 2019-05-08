@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+<div class='container-fluid'>
+  <h2>Add Courses</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class='btn btn-primary' type="button submit">Add Course</button>
+    <a href={% url 'view_courses' %} class='btn btn-primary' role='button'>Cancel</a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Course{% endblock %}
+
+{% block content %}
+{% if course %}
+<div class='container-fluid'>
+  <h2>Delete Course </h2>
+  <form method="POST" id="to-delete">{% csrf_token %}
+    <select id='to-delete' name='to-delete'>
+        {% for c in course %}
+        <option value={{ c.id }}>{{ c.course_number }}</option>
+        {% endfor %}
+    </select>
+    <button class='btn btn-primary' type="button Submit">Delete</button>
+      <a href = {% url 'view_courses' %} class='btn btn-primary' role='button'>Cancel</a>
+  </form>
+</div>
+
+{% else %}
+<div class='container'>
+  <h2>Delete Course </h2>
+  <div class='alert alert-primary'>No courses.</div>
+  <a href={% url 'view_courses' %} class='btn btn-primary' role='button'>Back</a>
+</div>
+  {% endif%}
+
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class='container' style='padding: 15px'>
+    <div class='container center-block text-center'>
+        <img src={% static '/img/ccny.jpg'%}>
+        <h1>QuickReg</h1>
+        {% if user.is_authenticated %}
+        <p>Hi {{ user.username }}!</p>
+    </div>
+
+    <!--Student View-->
+    {% if user.user_type == 0 %}
+        <div class='container center-block text-center'>
+                    <div class='alert alert-primary' role='alert'>{{ adv_message }}</div>
+                </div>
+                {% if user.was_denied == True %}
+                    <div class='alert alert-danger' role='alert'>
+                        Your advising form was rejected, please resubmit!
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-1'></div>
+                <div class='col-2 center-block text-center'>
+                    {% if adv_status == 0 %}
+                    <a href= {% url 'submit_advising' %} class='btn btn-block btn-primary' role='button'>Advising</a> 
+                    {% else %}
+                    <a href = {% url 'view_advising' %} class='btn btn-block btn-primary' role='button'>Advising</a>
+                    {% endif %}
+                </div>
+                <div class='col-2 center-block text-center'>
+                    <a href={% url 'view_appointments' %} class='btn btn-block btn-primary' role='button'>Appointments</a>
+                </div>
+                <div class='col-2 center-block text-center' id='courses'>
+                    <a href={% url 'view_courses' %} class='btn btn-block btn-primary' role='button'>Courses</a>
+                </div>
+                <div class='col-2 center-block text-center'>
+                    <a href = {% url 'view_inbox' %} class='btn btn-block btn-primary' role='button'>Inbox
+                        <span class="badge badge-light">{{ num_messages }}</span>
+                    </a>
+                </div>
+                <div class='col-2 center-block text-center'>
+                    <a href="{% url 'logout' %}" class='btn btn-block btn-primary' role='button'>Log Out</a>
+                </div>
+                <div class='col-1'></div>
+            </div>
+        </div>
+    <!--end student view-->
+
+    <!--teacher view-->
+    {% elif user.user_type == 1 %}
+        <div class='container'>
+            <div class='row'>
+                <div class='col-3 center-block text-center'>
+                    <a href={% url 'select_advising' %} class='btn btn-block btn-primary' role='button'>Advising
+                        <span class='badge badge-light'>{{ num_advise }}</span>
+                    </a>
+                </div>    
+                <div class='col-3 center-block text-center' id='courses'>
+                    <a href={% url 'view_courses' %} class='btn btn-block btn-primary' role='button'>Courses</a>
+                </div>
+                <div class='col-3 center-block text-center'>
+                    <a href = {% url 'view_inbox' %} class='btn btn-block btn-primary' role='button'>Inbox
+                        <span class="badge badge-light">{{ num_messages }}</span>
+                    </a>
+                </div>
+                <div class='col-3 center-block text-center'>
+                    <a href="{% url 'logout' %}" class='btn btn-block btn-primary' role='button'>Log Out</a>
+                </div>
+            </div>
+        </div>
+    <!--end teacher view-->
+
+    <!--Crystal view-->
+    {% elif user.user_type == 2 %}
+        <div class='container'>
+            <div class='row'>
+                <div class='col-1'></div>
+                <div class='col-2 center-block text-center'>
+                    <a href={% url 'select_advising' %} class='btn btn-block btn-primary' role='button'>Advising
+                        <span class='badge badge-light'>{{ num_advise }}</span>
+                    </a>
+                </div>   
+                <div class='col-2 center-block text-center' id='courses'>
+                    <a href={% url 'view_courses' %} class='btn btn-block btn-primary' role='button'>Courses</a>
+                </div>
+                <div class='col-2 center-block text-center'>
+                    <a href={% url 'view_appointments' %} class='btn btn-block btn-primary' role='button'>Appointments</a>
+                </div>
+                <div class='col-2 center-block text-center'>
+                    <a href = {% url 'view_inbox' %} class='btn btn-block btn-primary' role='button'>Inbox
+                        <span class="badge badge-light">{{ num_messages }}</span>
+                    </a>
+                </div>
+                <div class='col-2 center-block text-center'>
+                    <a href="{% url 'logout' %}" class='btn btn-block btn-primary' role='button'>Log Out</a>
+                </div>
+                <div class='col-1'></div>
+            </div>
+        </div>
+    {% endif %}
+    <!--end Crystal view-->
+</div>
+</div>
+
+{% else %}
+<div class="container h-100 center-block text-center">
+    <div class="row align-items-center h-100">
+        <div class="col-6 mx-auto">
+            <div class="jumbotron">
+                <p>You are not logged in.</p>
+                <a href="{% url 'login' %}" class='btn btn-primary' role='button'>Login</a>
+                <a href="{% url 'signup' %}" class='btn btn-primary' role='button'>Sign Up</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

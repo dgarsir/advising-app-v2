@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class='container'>
+  <h1>Delete Appointment</h1>
+  {% if apt %}
+  <form method="POST" id="to_delete">{% csrf_token %}
+    <select id='to_delete' name='to_delete'>
+        {% for x in apt %}
+        <option value={{ x.id }}>{{ x.date }} {{ x.start_time }}-{{ x.end_time }}</option>
+        {% endfor %}
+    </select>
+    <button class='btn btn-danger' type="Button Submit">Delete</button>
+    <a href={% url 'view_appointments' %} class='btn btn-primary' role='button'>Cancel</a>
+  </form>
+  {% else %}
+  <div class='alert alert-primary'>No appointments</div>
+  <a href={% url 'view_appointments' %} class='btn btn-primary' role='button'>Back</a>
+  {% endif%}
+{% endblock %}

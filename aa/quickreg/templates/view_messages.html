@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load message_extras %}
+{% block content %}
+
+<div class='container'>
+<h1>Inbox</h1>
+{% if num_messages > 0 %}
+    {% for message in messages %}
+        {% if message.receiver == request.user.EMPLID %}
+        <div class='card'>
+                <h5 class='card-title'>Subject: {{ message.subject }}</h5>
+                <p class='card-text'>Time Received: {{ message.timestamp }}, From: {{ message.sender|EMPLID_to_FnLn }} ({{ message.sender }})</p>
+                <p class='card-body'>{{ message.content }}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+</div>
+{% else %}
+    <div class='alert alert-secondary'>No messages.</div>
+{% endif %}
+<div class='container' style='padding: 15px'>
+    <a href = {% url 'send_message' %} class='btn btn-success' role='button'>Send</a>
+    {% if num_messages %}
+    <a href = {% url 'delete_message' %} class='btn btn-danger' role='button'>Delete</a>
+    {% else %}
+    <a href='#' class='btn btn-danger disabled' role='button'>Delete</a>
+    {% endif %}
+    <a href = {% url 'home' %} class='btn btn-primary' role='button' = none>Back</a>
+</div>
+{% endblock content %}

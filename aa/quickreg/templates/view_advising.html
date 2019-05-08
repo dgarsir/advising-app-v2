@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container'>
+  <h1>Current Submission</h1>
+  <ul class='list-group'>
+    <li class="list-group-item">Semester: {{ semester }}</li>
+    <li class="list-group-item">Major: {{ major }}</li>
+    <li class="list-group-item">QPA: {{ QPA }}</li>
+    <li class="list-group-item">GPA: {{ GPA }}</li>
+    <li class="list-group-item">Intended Courses: {{ intended_courses }}</li>
+    <li class="list-group-item">Currently Enrolled: {{ currently_enrolled }}</li>
+    <li class="list-group-item">Completed Courses: {{ completed_courses }}</li>
+    <li class="list-group-item">Total Credits: {{ total_credits }}</li>
+    <li class="list-group-item">Date Submitted: {{ date_submitted }}</li>
+  </ul>
+</div>
+<div class='container' style='padding:15px'>
+  <form method="POST">{% csrf_token %}
+    <button class='btn btn-primary' type="submit button">Delete</button>
+    <a href={% url 'home' %} class='btn btn-primary' type='btn'>Back</a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Appointment{% endblock %}
+
+{% block content %}
+
+<div class='container'>
+  <h2>Add Appointment</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class='btn btn-success' type="button submit">Add</button>
+    <a href={% url 'view_appointments' %} class='btn btn-primary' role='button'>Cancel</a>
+    </form>
+</div>
+{% endblock %}
