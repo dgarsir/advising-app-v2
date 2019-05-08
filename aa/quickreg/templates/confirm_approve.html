@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class='container'>
-<h2>Confirm approval of {{ a_form.author }}</h2>
+<h2>Confirm approval of {{ a_form.customuser.EMPLID }}</h2>
 <form method='POST'>{% csrf_token %}
     <button class='btn btn-primary' type='submit'>Confirm</button>
     <a href={% url 'view_advising_faculty' %} class='btn btn-primary' role='button'>Cancel</a>

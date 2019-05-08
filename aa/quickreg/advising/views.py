@@ -12,7 +12,7 @@ def submit_advising(request):
         form = SubmitAdvisingForm(request.POST)
         if form.is_valid():
             a_form = form.save(commit=False)
-            a_form.author = request.user.EMPLID
+            a_form.customuser = request.user
             a_form.date_submitted = timezone.now()
             if (a_form.total_credits < 45):
                 a_form.status = 2
@@ -35,14 +35,17 @@ def select_advising(request):
         request.session['selected_id'] = request.POST.get('selected_form')
         #for some reason redirect works and render doesn't?
         #idk don't change it
+        print("session = " + request.session['selected_id'])
         return redirect('view_advising_faculty')
     return render(request, 'select_advising.html', {'to_be_advised' : to_be_advised})
 
 def view_advising_faculty(request):
+    
+    print(request.session['selected_id'])
 
-    a_form = Advising.objects.get(pk = request.session['selected_id'])
-    f_name = CustomUser.objects.get(EMPLID = a_form.author).first_name
-    l_name = CustomUser.objects.get(EMPLID = a_form.author).last_name
+    a_form = Advising.objects.get(customuser = request.session['selected_id'])
+    f_name = CustomUser.objects.get(EMPLID = a_form.customuser.EMPLID).first_name
+    l_name = CustomUser.objects.get(EMPLID = a_form.customuser.EMPLID).last_name
 
     return render(request, 'view_advising_faculty.html', {
     'f_name' : f_name,
@@ -61,9 +64,9 @@ def view_advising_faculty(request):
 
 def view_advising(request):
 
-    a_form = list(Advising.objects.filter(author = request.user.EMPLID))[0]
+    a_form = list(Advising.objects.filter(customuser = request.user))[0]
     if request.method == "POST":
-        Advising.objects.filter(author = request.user.EMPLID).delete()
+        Advising.objects.filter(customuser = request.user).delete()
         return redirect('home')
     return render(request, 'view_advising.html', {
         'semester' : a_form.semester,
@@ -98,7 +101,7 @@ def confirm_approve(request):
 
 def confirm_deny(request):
     a_form = Advising.objects.get(pk = request.session['selected_id'])
-    student = CustomUser.objects.get(EMPLID = a_form.author)
+    student = CustomUser.objects.get(EMPLID = a_form.customuser.EMPLID)
     if request.method == "POST":
         student.was_denied = True
         student.save()

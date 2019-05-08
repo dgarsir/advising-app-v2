@@ -8,7 +8,7 @@
         <div class='form-group' style='padding: 15px'>
             <select id='form_select' name='selected_form'>
             {% for element in to_be_advised %}
-                <option value={{ element.id }}>{{element.author}}</option>
+                <option value={{ element.customuser.EMPLID }}>{{ element.customuser.EMPLID }}</option>
             {% endfor %}
             </select>
             <button class='btn btn-primary' type='submit button'>View</button>

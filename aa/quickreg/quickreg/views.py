@@ -16,7 +16,7 @@ def Home(request):
         if (user_type == 0):
 
             #gets advising form status by checking Advising model for EMPLID match
-            adv_form = Advising.objects.filter(author = request.user.EMPLID)
+            adv_form = Advising.objects.filter(customuser = request.user)
             adv_status = 0
 
             if len(adv_form) != 0:

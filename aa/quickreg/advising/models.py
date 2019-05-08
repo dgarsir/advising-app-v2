@@ -29,5 +29,5 @@ class Advising(models.Model):
     completed_courses = models.TextField("Completed Courses")
     total_credits = models.PositiveIntegerField("Total Credits", default = 0)
     date_submitted = models.DateTimeField("Date Submitted", default=timezone.now)
-    author = models.CharField("Author EMPLID", max_length=100, unique=True)
+    customuser = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     status = models.IntegerField("Status", default = 0)
