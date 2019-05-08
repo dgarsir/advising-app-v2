@@ -7,7 +7,7 @@ terms=(
 	)
 
 class Courses(models.Model):
-    course_number=models.CharField(max_length=50)
+    course_number=models.CharField(max_length=50, primary_key=True)
     course_name=models.CharField(max_length=100)
     teacher=models.CharField(max_length=50)
     term=models.CharField(max_length=50,choices=terms)

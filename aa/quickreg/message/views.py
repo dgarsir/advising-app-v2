@@ -8,7 +8,7 @@ def send_message(request):
 		form = MessageCreationForm(request.POST)
 		if form.is_valid():
 			m_form = form.save(commit=False)
-			m_form.sender = request.user.EMPLID
+			m_form.sender = request.user
 			m_form.save()
 			return redirect('home')
 	else:

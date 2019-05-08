@@ -21,7 +21,7 @@ def add_appointment(request):
 
 def view_appointments(request):
     if (request.user.user_type == 0):
-       appoint=Appointment.objects.filter(owner_EMPLID=request.user.EMPLID).order_by('date')
+       appoint=Appointment.objects.filter(customuser=request.user).order_by('date')
        appts=list(appoint)
        return render(request, 'view_appointments.html', {'appts':appts})
     else:
@@ -38,11 +38,10 @@ def delete_appointment(request):
 
 
 def request_appointment(request):
-    req = list(Appointment.objects.filter(owner_EMPLID=''))
+    req = list(Appointment.objects.filter(customuser=''))
     if request.method == "POST":
         selected = Appointment.objects.get(pk = request.POST.get('to_request'))
-        selected.owner_EMPLID = request.user.EMPLID
-        selected.owner_name = request.user.last_name + ', ' + request.user.first_name
+        selected.customuser = request.user
         selected.save()
         return redirect('home')
     return render(request, 'request_appointment.html',{'req': req})

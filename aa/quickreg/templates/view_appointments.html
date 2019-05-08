@@ -18,8 +18,8 @@
              <tr>
                 <td>{{x.date}}</td>
                 <td>{{x.start_time}} - {{x.end_time}}</td>
-                <td>{{x.owner_name}}</td>
-                <td>{{x.owner_EMPLID}}</td>
+                <td>{{x.customuser.last_name}}, {{x.customuser.first_name}}</td>
+                <td>{{x.customuser.EMPLID}}</td>
              </tr>
         {% endfor %}
         </table>
@@ -46,8 +46,8 @@
              <tr>
                 <td>{{x.date}}</td>
                 <td>{{x.start_time}} - {{x.end_time}}</td>
-                <td>{{x.owner_name}}</td>
-                <td>{{x.owner_EMPLID}}</td>
+                <td>{{x.customuser.last_name}}, {{x.customuser.first_name}}</td>
+                <td>{{x.customuser.EMPLID}}</td>
              </tr>
         {% endfor %}
         </table>

@@ -6,10 +6,10 @@
 <h1>Inbox</h1>
 {% if num_messages > 0 %}
     {% for message in messages %}
-        {% if message.receiver == request.user.EMPLID %}
+        {% if message.receiver == request.user %}
         <div class='card'>
                 <h5 class='card-title'>Subject: {{ message.subject }}</h5>
-                <p class='card-text'>Time Received: {{ message.timestamp }}, From: {{ message.sender|EMPLID_to_FnLn }} ({{ message.sender }})</p>
+                <p class='card-text'>Time Received: {{ message.timestamp }}, From: {{ message.sender.EMPLID|EMPLID_to_FnLn }} ({{ message.sender.EMPLID }})</p>
                 <p class='card-body'>{{ message.content }}</p>
         </div>
         {% endif %}
