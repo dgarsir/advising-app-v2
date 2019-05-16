@@ -12,5 +12,3 @@ class Courses(models.Model):
     teacher=models.CharField(max_length=50)
     term=models.CharField(max_length=50,choices=terms)
     credits=models.PositiveIntegerField(default=0)
-    
-

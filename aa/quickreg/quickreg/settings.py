@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'appointments.apps.AppointmentsConfig',
     'courses.apps.CoursesConfig',
     'message.apps.MessageConfig',
+    'registered.apps.RegisteredConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'

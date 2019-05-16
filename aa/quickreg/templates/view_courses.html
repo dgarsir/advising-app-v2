@@ -25,6 +25,9 @@
   {% else %}
   <div class='alert alert-secondary' role='alert'>No Courses</div>
   {% endif %}
+  {% if user.user_type == 0%}
+  <a href={% url 'add_class_info' %} class='btn btn-primary'>Register</a>
+  {% endif %}
   {% if user.user_type == 2 %}
   <a href={% url 'courses_add'%} class='btn btn-primary'>Add Course</a>
   {% if object_list %}

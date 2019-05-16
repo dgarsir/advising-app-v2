@@ -11,7 +11,7 @@ def Home(request):
     if authenticated:
 
         user_type = request.user.user_type
-        num_messages = len(Message.objects.filter(receiver = request.user.EMPLID))
+        num_messages = len(Message.objects.filter(receiver = request.user))
 
         if (user_type == 0):
 
