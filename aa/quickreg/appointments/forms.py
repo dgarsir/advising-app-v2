@@ -18,8 +18,8 @@ class List(forms.ModelForm):
             'start_time',
             'end_time'
             )
-'''class List(forms.Form):
+class List(forms.Form):
     req_fields= ('date','start_time','end_time')
-    req=forms.ChoiceField(choices=req_fields)'''
+    req=forms.ChoiceField(choices=req_fields)
 ''''''
 

@@ -5,10 +5,10 @@
 {% block content %}
 
 <div class='container-fluid'>
+{% if num_courses > 0 %}
   <h2>Add Courses</h2>
   <form method="POST" id='course_select'>{% csrf_token %}
     <select id= 'course_select' name='course_select'>
-      <option value=''>-----</option>
     	{% for course in courses %}
     	<option value= {{ course.course_number }}>
     		{{ course.course_name }}
@@ -18,5 +18,9 @@
     <button class='btn btn-primary' type="button submit">Add Course</button>
     <a href={% url 'view_courses' %} class='btn btn-primary' role='button'>Cancel</a>
   </form>
+{% else %}
+<div class='alert alert-secondary'>No messages.</div>
+<a href={% url 'view_courses' %} class='btn btn-primary' role='button'>Cancel</a>
+{% endif %}
 </div>
 {% endblock %}

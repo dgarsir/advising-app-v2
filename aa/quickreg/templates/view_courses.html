@@ -36,6 +36,7 @@
   <a href='#' class='btn btn-primary disabled'>Delete Course</a>
   {% endif %}
   {% endif %}
+  <a href={% url 'view_registered_courses' %} class='btn btn-primary'>Registered Courses</a>
   <a href={% url 'home' %} class='btn btn-primary'>Back</a>
 </div>
 {% endblock %}

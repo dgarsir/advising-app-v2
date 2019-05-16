@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Appointment Summary{% endblock %}
+
+{% block content %}
+
+<div class='container'>
+  <h2>Appointment Summary</h2>
+  <b><p>Day: </p></b>
+  <form method="post">
+    {% csrf_token %}
+    {% for x in day %}
+             <tr>
+                <p>{{x.date}}: {{x.Count}} appointments</p>
+             </tr>
+    {% endfor %}
+    <b><p>Month: </p></b>
+    {% for z in month %}
+             <tr>
+                <p>{{z.month}}: {{z.Count}} appointments</p>
+             </tr>
+    {% endfor %}
+    <b><p>Year: </p></b>
+    {% for y in year %}
+             <tr>
+                <p>{{y.year}}: {{y.Count}} appointments</p>
+             </tr>
+    {% endfor %}
+    <a href={% url 'view_appointments' %} class='btn btn-primary' role='button'>Back</a>
+    </form>
+</div>
+{% endblock %}

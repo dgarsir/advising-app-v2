@@ -18,7 +18,11 @@
              <tr>
                 <td>{{x.date}}</td>
                 <td>{{x.start_time}} - {{x.end_time}}</td>
+                {% if x.customuser.last_name != '' %}
                 <td>{{x.customuser.last_name}}, {{x.customuser.first_name}}</td>
+                {% else %}
+                <td><td>
+                {% endif %}
                 <td>{{x.customuser.EMPLID}}</td>
              </tr>
         {% endfor %}
@@ -46,7 +50,11 @@
              <tr>
                 <td>{{x.date}}</td>
                 <td>{{x.start_time}} - {{x.end_time}}</td>
+                {% if x.customuser.last_name != '' %}
                 <td>{{x.customuser.last_name}}, {{x.customuser.first_name}}</td>
+                {% else %}
+                <td><td>
+                {% endif %}
                 <td>{{x.customuser.EMPLID}}</td>
              </tr>
         {% endfor %}
@@ -54,13 +62,16 @@
     {% else %}
         <div class='alert alert-secondary' role='alert'>You have no scheduled appointments</div>
     {% endif %}
+        <a href={% url 'appointment_summary'%} class='btn btn-primary' type='button'>Appointment Summary</a>
         <a href={% url 'add_appointment' %} class='btn btn-primary' role='button'>Add Appointment</a>
         {% if appts %}
         <a href={% url 'delete_appointment' %} class='btn btn-primary' role='button'>Delete Appointment</a>
         {% else %}
         <a href='#' class='btn btn-primary disabled' role='button'>Delete Appointment</a>
+
         {% endif %}
         <a href={% url 'home' %} class='btn btn-primary' type='button'>Back</a>
+        
 </div>
 {% endif %}
 

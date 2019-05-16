@@ -29,4 +29,3 @@ def del_course(request):
         Courses.objects.filter(pk = request.POST.get('to-delete')).delete()
         return redirect('del_course')
     return render(request,'del_course.html', {'course': course})
-

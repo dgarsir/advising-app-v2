@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='container'>
+    <p>Already registered!</p>
+    <a href={% url 'add_class_info' %} class='btn btn-primary' role='button'>Back</a>
+</div>
+{% endblock %}
